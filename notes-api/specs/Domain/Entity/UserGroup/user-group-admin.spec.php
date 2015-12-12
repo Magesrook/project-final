@@ -28,7 +28,7 @@ describe('Notes\Domain\Entity\UserGroup\Admins', function () {
             //how to use faker to make array?
             $users = $faker->userName;
             $admin = new Admins();
-            expect($admin->getAdminUsers())->equal($users);
+            expect($admin->getUsers())->equal($users);
         }) ;
     });
     describe('->setAdminUsers($array)', function () {
@@ -36,18 +36,18 @@ describe('Notes\Domain\Entity\UserGroup\Admins', function () {
             $value = array('mbrow234', 'randomUser1', 'coolUser85');
             $actual = new Admins();
             $actual->setAdminUsers($value);
-            expect($actual->getAdminUsers())->equal($value);
+            expect($actual->getUsers())->equal($value);
         });
     });
     describe('->deleteUser($userName)', function () {
         it('should delete a user that the admin is responsible for', function () {
             $value = array('mbrow234', 'randomUser1', 'coolUser85');
-            $actual = new Admin();
+            $actual = new Admins();
             $actual->setAdminUsers($value);
-            $before = $actual->getAdminUsers();
+            $before = $actual->getUsers();
             $user = 'coolUser85';
             $actual->deleteUser($user);
-            $after = $actual->getAdminUsers();
+            $after = $actual->getUsers();
             expect(in_array($user, $before));
             expect(!in_array($user, $after));
         });
@@ -55,12 +55,12 @@ describe('Notes\Domain\Entity\UserGroup\Admins', function () {
     describe('->addUser($userName)', function () {
         it('should add a user to the admin', function () {
             $value = array('mbrow234', 'randomUser1', 'coolUser85');
-            $actual = new Admin();
+            $actual = new Admins();
             $actual->setAdminUsers($value);
-            $before = $actual->getAdminUsers();
+            $before = $actual->getUsers();
             $user = 'coolUserNew';
             $actual->addUser($user);
-            $after = $actual->getAdminUsers();
+            $after = $actual->getUsers();
             expect(!in_array($user, $before));
             expect(in_array($user, $after));
         });

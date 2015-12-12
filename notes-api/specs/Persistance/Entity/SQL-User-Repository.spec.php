@@ -22,6 +22,7 @@ describe('Notes\Persistence\Entity\SQLUserRepository', function () {
             );
         }) ;
     });
+
     describe('->add()', function () {
         it('should a 1 user to the repository', function () {
             $this->repo->add($this->userFactory->create());

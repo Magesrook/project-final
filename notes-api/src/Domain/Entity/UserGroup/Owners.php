@@ -52,4 +52,16 @@ class Owners implements UserGroupInterface
     {
         // TODO: Implement removeUser() method
     }
+
+    public function setAdminUsers($user)
+    {
+
+    }
+
+    public function deleteUser($user)
+    {
+
+    }
+
+
 }

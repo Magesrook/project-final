@@ -25,13 +25,13 @@ class SQLUserRepository implements UserRepositoryInterface
 {
     /** @var array */
     protected $users;
-
+    protected $adapters;
 
 
     /**
      * InMemoryUserRepository constructor
      */
-    public function __construct()
+    public function __construct(PdoAdapter $adapter)
     {
         $this->users = [];
     }
@@ -119,7 +119,14 @@ class SQLUserRepository implements UserRepositoryInterface
      */
     public function modifyById(Uuid $id, User $user)
     {
-        // TODO: Implement modifyById() method
+        foreach ($this->users as $i => $user) {
+            /** @var \Notes\Domain\Entity\User $user */
+            if ($user->getId()->__toString() === $id->__toString()) {
+                unset($this->users[$i]);
+                return true;
+            }
+        }
+
     }
 
     /**
