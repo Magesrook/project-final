@@ -10,6 +10,7 @@ namespace Notes\Db\Adapter;
 
 
 use Symfony\Component\Config\Definition\Exception\Exception;
+use PDO;
 
 class PdoAdapter implements RdbmsAdapterInterface
 {
@@ -61,24 +62,41 @@ class PdoAdapter implements RdbmsAdapterInterface
     public function close()
     {
         unset($this->pdo);
-        // TODO: Implement close() method.
     }
-public function delete($table, $criteria)
-{
-    // TODO: Implement delete() method.
-}public function execute()
-{
-    // TODO: Implement execute() method.
-}public function insert($table, $data)
-{
-    // TODO: Implement insert() method.
-}public function select($table, $criteria)
-{
-    // TODO: Implement select() method.
-}public function sql($sql)
-{
-    // TODO: Implement sql() method.
-}public function update($table, $data, $criteria)
-{
-    // TODO: Implement update() method.
-}}
+
+    public function delete($table, $criteria)
+    {
+        $sqlString = "DELETE FROM $table $criteria;";
+        return $this->execute($sqlString);
+
+    }
+
+    public function execute($sqlString)
+    {
+        return $this->pdo->exec($sqlString);
+    }
+
+    public function insert($table, $data)
+    {
+        $sqlString = "INSERT INTO $table VALUES $data;";
+        return $this->execute($sqlString);
+    }
+
+    public function select($table, $criteria)
+    {
+        $sqlString = "SELECT * FROM $table $criteria";
+        return $this->sql($sqlString);
+    }
+
+    public function sql($sql)
+    {
+        $pdoString = $this->pdo->query($sql);
+        return $pdoString->fetchall();
+    }
+
+    public function update($table, $data, $criteria)
+    {
+        $sqlString = "UDATE $table SET $data $criteria;";
+        return $this->execute($sqlString);
+    }
+}

@@ -16,7 +16,7 @@ namespace Notes\Db\Adapter;
 interface RdbmsAdapterInterface extends DbAdapterInterface
 {
     public function delete($table, $criteria);
-    public function execute();
+    public function execute($sqlString);
     public function insert($table, $data);
     public function select($table, $criteria);
     public function sql($sql);

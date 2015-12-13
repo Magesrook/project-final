@@ -1,14 +1,18 @@
 <?php
+
+
 /**
  * Created by PhpStorm.
- * User: Mark
- * Date: 11/17/2015
- * Time: 6:45 PM
+ * User: cs3620
+ * Date: 11/17/15
+ * Time: 6:46 PM
  */
 
 use Notes\Domain\Entity\UserFactory;
-use Notes\Domain\ValueObject\StringLiteral;
+//use Notes\Domain\ValueObject\StringLiteral;
 use Notes\Persistence\Entity\SQLUserRepository;
+use Notes\Domain\Entity\User;
+use Notes\Domain\ValueObject\Uuid;
 
 describe('Notes\Persistence\Entity\SQLUserRepository', function () {
     beforeEach(function () {

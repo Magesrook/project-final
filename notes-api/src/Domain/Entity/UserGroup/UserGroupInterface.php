@@ -16,8 +16,35 @@
 
 namespace Notes\Domain\Entity\UserGroup;
 
+use Notes\Domain\Entity\User;
+
+
 interface UserGroupInterface
 {
+    /**
+     * @return string
+     */
     public function getName();
+
+    /**
+     * @return array or list
+     */
     public function getUsers();
+
+    /**
+     * @param User $user
+     */
+    public function addUser(User $user);
+
+    /**
+     * @param User $user
+     * @return bool
+     */
+    public function deleteUser(User $user);
+
+    /**
+     * @param User $user
+     * @return bool
+     */
+    public function userExistsInGroup(User $user);
 }

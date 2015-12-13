@@ -6,13 +6,13 @@
  * Time: 6:10 PM
  */
 
-use Notes\Domain\Entity\UserFactory;
+use Notes\Domain\Entity\UserGroup\UserFactory;
 
 describe('Notes\Domain\Entity\UserFactory', function (){
     describe('->__construct()', function(){
         it('Should create a new UserFactory object', function(){
             $actual = new UserFactory();
-            expect($actual)->to->be->instanceof('Notes\Domain\Entity\UserFactory');
+            expect($actual)->to->be->instanceof('Notes\Domain\Entity\UserGroup\UserFactory');
         });
     });
     describe('->create()', function(){

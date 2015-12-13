@@ -8,11 +8,12 @@
 
 namespace Notes\Persistence\Entity;
 
-use Faker\Provider\Uuid;
+//use Faker\Provider\Uuid;
 use InvalidArgumentException;
 use Notes\Domain\Entity\UserRepositoryInterface;
 use Notes\Domain\Entity\User;
 use Notes\Domain\ValueObject\StringLiteral;
+use Notes\Domain\ValueObject\Uuid;
 
 
 class InMemoryUserRepository implements  UserRepositoryInterface
@@ -56,7 +57,7 @@ class InMemoryUserRepository implements  UserRepositoryInterface
      * @param $username
      * @return array
      */
-    public function getByUsername($username)
+    public function getByUserName(StringLiteral $username)
     {
         $results = [];
 
@@ -134,7 +135,7 @@ class InMemoryUserRepository implements  UserRepositoryInterface
      * @param User $user
      * @return mixed
      */
-    public function modifyById(\Note\Domain\Entity\Uuid $id, User $user)
+    public function modifyById(Uuid $id, User $user)
     {
         // TODO: Implement modifyById() method.
     }

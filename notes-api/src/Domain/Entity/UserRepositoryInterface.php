@@ -2,6 +2,9 @@
 
 namespace Notes\Domain\Entity;
 
+use Notes\Domain\ValueObject\StringLiteral;
+use Notes\Domain\ValueObject\Uuid;
+
 interface UserRepositoryInterface
 {
     /**
@@ -39,4 +42,16 @@ interface UserRepositoryInterface
      * @return mixed
      */
     public function removeById(Uuid $id);
+
+    /**
+     * @param StringLiteral $username
+     * @return User
+     */
+    public function getByUserName(StringLiteral $username);
+
+    /**
+     * @param StringLiteral $username
+     * @param User $user
+     */
+    public function modifyByUserName(StringLiteral $username, User $user);
 }
