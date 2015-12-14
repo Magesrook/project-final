@@ -43,6 +43,13 @@ class User
         return $this->id;
     }
 
+    public function setId(StringLiteral $id)
+    {
+        $this->id = $id;
+
+        return $this;
+    }
+
     /**
      * @return StringLiteral
      */

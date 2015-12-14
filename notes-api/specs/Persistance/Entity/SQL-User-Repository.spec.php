@@ -7,7 +7,9 @@
  */
 
 use Notes\Domain\Entity\UserFactory;
+use Notes\Domain\Entity\User;
 use Notes\Domain\ValueObject\StringLiteral;
+use Notes\Domain\ValueObject\Uuid;
 use Notes\Persistence\Entity\SQLUserRepository;
 
 describe('Notes\Persistence\Entity\SQLUserRepository', function () {
@@ -23,13 +25,40 @@ describe('Notes\Persistence\Entity\SQLUserRepository', function () {
         }) ;
     });
 
-    describe('->add()', function () {
-        it('should a 1 user to the repository', function () {
-            $this->repo->add($this->userFactory->create());
-
-            expect($this->repo->count())->to->equal(1);
+    describe('->add()', function() {
+        it('Should add a user to the repository', function() {
+            $actual = new SQLUserRepository();
+            $user = new User(new Uuid);
+            $count = $actual->count();
+            $actual->add($user);
+            $count++;
+            expect($actual->count())->to->equal($count);
         });
     });
+
+    //public function count()
+
+    describe('->addUser(Nightshade)', function() {
+        it('should adds to the sql table', function () {
+            $actual = new SQLUserRepository();
+            $username = "Nightshade";
+            $password = "L37m31n!";
+            $email = "nightshade@gmail.com";
+            $firstName = "John";
+            $lastName = "Smith";
+            $this->userId = new Uuid;
+            $user = new User($this->userId, $username, $password, $email, $firstName, $lastName);
+            $count = $actual->count();
+            expect($actual->count())->to->equal($count);
+            $actual->add($user);
+            $count++;
+            expect($actual->count())->to->equal($count);
+            //expect($actual->getUser($user1Key))->equal($user1);
+        });
+    });
+
+
+
     describe('->getByUsername()', function () {
         it('should return a single User object', function () {
             /** @var \Notes\Domain\Entity\User $user */
@@ -46,5 +75,61 @@ describe('Notes\Persistence\Entity\SQLUserRepository', function () {
             expect($actual)->to->be->instanceof('Notes\Domain\Entity\User');
 //            expect($actual->getUsername())->to->be->equal(new StringLiteral('harrie'));
         });
-    });//s
+    });
+    describe('->getById()', function () {
+        it('should return a single user that has the userid given', function () {
+            $actual = new SQLUserRepository();
+            $username = "Nightshade";
+            $password = "L37m31n!";
+            $email = "nightshade@gmail.com";
+            $firstName = "John";
+            $lastName = "Smith";
+            $this->userId = new Uuid;
+            $user = new User($this->userId, $username, $password, $email, $firstName, $lastName);
+            $count = $actual->count();
+            expect($actual->count())->to->equal($count);
+            $actual->add($user);
+            $returnedUser = $actual->getById($this->userId);
+            expect($returnedUser)->to->be->instanceof('Notes\Domain\Entity\User');
+            expect($returnedUser->getUserName())->to->equal($user->getUserName());
+        });
+    });
+
+    describe('->modifyById($id, $user)', function () {
+        it('should return a single user that has the userid given', function () {
+            $actual = new SQLUserRepository();
+            $username = "Nightshade";
+            $password = "L37m31n!";
+            $email = "nightshade@gmail.com";
+            $firstName = "John";
+            $lastName = "Smith";
+            $this->userId = new Uuid;
+            $user = new User($this->userId, $username, $password, $email, $firstName, $lastName);
+            $count = $actual->count();
+            expect($actual->count())->to->equal($count);
+            $actual->add($user);
+            $returnedUser = $actual->getById($this->userId);
+            expect($returnedUser)->to->be->instanceof('Notes\Domain\Entity\User');
+            expect($returnedUser->getUserName())->to->equal($user->getUserName());
+        });
+    });
+
+    describe('->removeById()', function () {
+        it('should return a single user that has the userid given', function () {
+            $actual = new SQLUserRepository();
+            $username = "Nightshade";
+            $password = "L37m31n!";
+            $email = "nightshade@gmail.com";
+            $firstName = "John";
+            $lastName = "Smith";
+            $this->userId = new Uuid;
+            $user = new User($this->userId, $username, $password, $email, $firstName, $lastName);
+            $count = $actual->count();
+            expect($actual->count())->to->equal($count);
+            $actual->add($user);
+            $returnedUser = $actual->getById($this->userId);
+            expect($returnedUser)->to->be->instanceof('Notes\Domain\Entity\User');
+            expect($returnedUser->getUserName())->to->equal($user->getUserName());
+        });
+    });
 });
