@@ -18,11 +18,11 @@ use Notes\Domain\ValueObject\User;
 
 describe('\Notes\Domain\Entity\UserGroup\Owners', function () {
     describe('->__construct()', function () {
-        it('should return a Owner object', function () {
+        it('should return a Owners object', function () {
             $actual = new Owners();
 
             expect($actual)->to->be->instanceof(
-                '\Notes\Domain\ValueObject\Owners'
+                '\Notes\Domain\Entity\UserGroup\Owners'
             );
         });
     });

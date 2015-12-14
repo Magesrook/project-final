@@ -19,7 +19,7 @@ describe('Notes\Domain\Entity\UserGroup\Admins', function () {
     describe('->__construct()', function () {
         it('should return an Admin object', function () {
             $actual = new Admins();
-            expect($actual)->to->be->instanceof('\Notes\Domain\Entity\UserGroup\Admin');
+            expect($actual)->to->be->instanceof('\Notes\Domain\Entity\UserGroup\Admins');
         });
     });
     describe('->getAdminUsers()', function () {
